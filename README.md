@@ -27,7 +27,7 @@ Qed.
 ```
 
 
-**Exercise 3: forall (A B : Prop), ~A -> A -> B **
+**Exercise 3: forall (A B : Prop), ~A -> A -> B**
 
 ```coq
 Lemma Ex03_1 : forall (A B : Prop), ~A -> A -> B .
