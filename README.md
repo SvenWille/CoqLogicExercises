@@ -27,9 +27,14 @@ Qed.
 ```
 
 
-**Exercise 3: **
+**Exercise 3: forall (A B : Prop), ~A -> A -> B **
 
 ```coq
+Lemma Ex03_1 : forall (A B : Prop), ~A -> A -> B .
+Proof.
+  intros.
+  contradiction.
+Qed.
 ```
 
 **Exercise 4: **
@@ -39,9 +44,17 @@ Qed.
 
 ## First Order Logic
 
-**Exercise 1: **
+**Exercise 1: forall (P Q : Set -> Prop), forall(a : Prop), P a -> Q a -> exists (x : Prop), P x /\ Q x**
 
 ```coq
+Lemma ExF01 : forall (P Q : Set -> Prop), forall(a : Prop), P a -> Q a -> exists (x : Prop), P x /\ Q x.
+Proof.
+  intros.
+  exists a.
+  split.
+  exact H.
+  exact H0.
+Qed.
 
 ```
 
