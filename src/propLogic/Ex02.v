@@ -3,8 +3,8 @@
 
 Lemma Ex02_1 : forall (A B : Prop), A -> B -> A.
 Proof. 
-intros.
-exact H.
+  intros.
+  exact H.
 Qed.
 
 
@@ -12,5 +12,5 @@ Qed.
 
 Lemma Ex02_2 : forall (A B : Prop), A -> B -> A.
 Proof.
-firstorder.  (*auto would be enough*)
+  firstorder.  (*auto would be enough*)
 Qed.
