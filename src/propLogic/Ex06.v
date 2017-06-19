@@ -2,7 +2,7 @@
 (*Proof A \/ B -> A \/ C -> A \/ (B /\ C)*)
 
 
-Lemma Ex06 : forall (A B C : Prop), A \/ B -> A \/ C -> A \/ (B /\ C).
+Lemma Ex06 {a b c : Prop}: a \/ b -> a \/ c -> a \/ (b /\ c).
 Proof.
   intros.
   destruct H.
