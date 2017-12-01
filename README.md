@@ -30,7 +30,7 @@ Qed.
 **Exercise 3: ~A -> A -> B**
 
 ```coq
-Theorem Ex003: ~A -> A -> B.
+Theorem Ex003 (A B : Prop): ~A -> A -> B.
 Proof.
   intros.
   contradiction.
@@ -149,6 +149,61 @@ Proof.
   right.
   intro.
   exact H.
+Qed.
+```
+
+**Exercise 11: (A /\ ~A) -> B**
+```coq
+Theorem Ex011 (A B : Prop) : (A /\ ~A) -> B.
+Proof.  
+  intro.
+  destruct H.
+  exfalso.
+  apply H0.
+  exact H.
+Qed.
+```
+
+**Exercise 12: A -> A \\/ B**
+```coq
+Theorem Ex012 (A B : Prop): A -> A \/ B.
+Proof.
+  intro.
+  left. exact H.
+Qed.
+```
+
+**Exercise 13: (A -> B) -> (~B -> ~A)**
+```coq
+Theorem Ex013 (A B : Prop) :(A -> B) -> (~B -> ~A).
+Proof.
+  intros.
+  intro.
+  apply H0. apply H.
+  exact H1.
+Qed.
+```
+
+**Exercise 14: A /\ B -> B /\ A**
+```coq
+Theorem Ex014 (A B : Prop) : A /\ B -> B /\ A.
+Proof.
+  intro.
+  destruct H.
+  split.
+  + exact H0.
+  + exact H.
+Qed.
+```
+
+**Exercise 15: (A -> B) -> A -> A /\ B**
+```coq
+Theorem Ex015 (A B : Prop): (A -> B) -> A -> A /\ B.
+Proof.
+  intros.
+  split.
+  + exact H0.
+  + apply H. exact H0.
 Qed.
 ```
 ## First Order Logic
