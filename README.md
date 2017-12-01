@@ -96,7 +96,7 @@ Proof.
 Qed.
 ```
 
-**Exercise 8: ~(A/\ B) -> ~A \// ~B**
+**Exercise 8: ~(A/\ B) -> ~A \\/ ~B**
 ```coq
 Require Import Classical.
 
@@ -120,7 +120,7 @@ Proof.
 Qed.
 ```
 
-**Exercise 9: ~C -> A \\/ ((A \// C) -> B)**
+**Exercise 9: ~C -> A \\/ ((A \\/ C) -> B)**
 ```coq
 Require Import Classical.
 
@@ -142,7 +142,7 @@ Proof.
 Qed.
 ```
 
-**Exercise 10: A \/ ~False**
+**Exercise 10: A \\/ ~False**
 ```coq
 Theorem Ex010 (A : Prop) : A \/ ~False.
 Proof.
