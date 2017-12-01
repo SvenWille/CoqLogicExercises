@@ -1,12 +1,12 @@
 Require Import Classical.
 
-Lemma Ex008 : forall {a b : Prop}, ~(a/\ b) -> ~a \/ ~b.
+Theorem Ex008 (A B : Prop): ~(A/\ B) -> ~A \/ ~B.
 Proof.
   intros.
-  destruct (classic (~a \/ ~b)).
+  destruct (classic (~A \/ ~B)).
   + exact H0.
   + right.
-    destruct (classic (~a)).
+    destruct (classic (~A)).
     - intro.
       apply H0.
       left.

@@ -95,6 +95,62 @@ Proof.
     contradiction.
 Qed.
 ```
+
+**Exercise 8: ~(A/\ B) -> ~A \/ ~B**
+```coq
+Require Import Classical.
+
+Theorem Ex008 (A B : Prop): ~(A/\ B) -> ~A \/ ~B.
+Proof.
+  intros.
+  destruct (classic (~A \/ ~B)).
+  + exact H0.
+  + right.
+    destruct (classic (~A)).
+    - intro.
+      apply H0.
+      left.
+      exact H1.
+    - apply NNPP in H1.
+      intro.
+      apply H.
+      split.
+      * exact H1.
+      * exact H2.
+Qed.
+```
+
+**Exercise 9: ~C -> A \/ ((A \/ C) -> B)**
+```coq
+Require Import Classical.
+
+Theorem Ex009 (A B C : Prop) : ~C -> A \/ ((A \/ C) -> B).
+Proof.
+  intro.
+  apply NNPP.
+  intro.
+  apply H0.
+  right.
+  apply NNPP.
+  intro.
+  apply H1.
+  intro.
+  destruct H2.
+  + exfalso.
+    apply H0. left. exact H2.
+  + exfalso. apply H. exact H2.
+Qed.
+```
+
+**Exercise 10: A \/ ~False**
+```coq
+Theorem Ex010 (A : Prop) : A \/ ~False.
+Proof.
+  right.
+  intro.
+  exact H.
+Qed.
+```
 ## First Order Logic
 
 **Exercise 1: forall (P Q : Set -> Prop), forall(a : Prop), P a -> Q a -> exists (x : Prop), P x /\ Q x**
