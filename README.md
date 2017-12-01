@@ -1,7 +1,6 @@
 # LogicExercisesInCoq
 
 - scroll down for exercises in FOL (first order logic)  
-- for original source code (using plain ascii instead of unicode) and alternative/other solutions have a look at the "src" folder  
 
 ## Propositional Logic
 
