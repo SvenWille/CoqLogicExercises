@@ -64,7 +64,8 @@ Proof.
 Qed.
 ```
 
-**Exercise 6: A \/ B -> A \/ C -> A \/ (B /\ C)**
+**Exercise 6: A \\/ B -> A \\/ C -> A \\/ (B /\ C)**
+
 ```coq
 Theorem Ex06 (A B C : Prop): A \/ B -> A \/ C -> A \/ (B /\ C).
 Proof.
