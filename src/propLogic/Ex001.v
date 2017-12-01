@@ -2,7 +2,7 @@
 (*Proof: A -> A*)
 
 
-Lemma Ex01_1 {a : Prop}: a -> a.
+Theorem Ex001_1 (A : Prop): A -> A.
 Proof.
   intros.
   exact H.
@@ -10,7 +10,7 @@ Qed.
 
 (*using automation*)
 
-Lemma Ex01_2 {a : Prop}: a -> a.
+Theorem Ex001_2 (A : Prop): A -> A.
 Proof.
   auto.
 Qed.

@@ -1,6 +1,6 @@
 Require Import Classical.
 
-Theorem Ex009 (a b c : Prop) : ~c -> a \/ ((a \/ c) -> b).
+Theorem Ex009 (A B C : Prop) : ~C -> A \/ ((A \/ C) -> B).
 Proof.
   intro.
   apply NNPP.

@@ -9,7 +9,7 @@ Proof the following theorems
 
 **Exercise 1: A -> A**
 ```Coq
-Lemma Ex01_1 : forall A : Prop , A -> A .
+Theorem Ex001_1 (A : Prop): A -> A.
 Proof.
   intros.
   exact H.
@@ -19,7 +19,7 @@ Qed.
 **Exercise 2: A -> B -> A**
 
 ```coq
-Lemma Ex02_1 : forall (A B : Prop), A -> B -> A.
+Theorem Ex002_1 (A B : Prop): A -> B -> A.
 Proof. 
   intros.
   exact H.
@@ -27,19 +27,19 @@ Qed.
 ```
 
 
-**Exercise 3: forall (A B : Prop), ~A -> A -> B**
+**Exercise 3: ~A -> A -> B**
 
 ```coq
-Lemma Ex03_1 : forall (A B : Prop), ~A -> A -> B .
+Theorem Ex003: ~A -> A -> B.
 Proof.
   intros.
   contradiction.
 Qed.
 ```
 
-**Exercise 4: forall (A B C : Prop), (A -> (B /\ C)) -> (A -> B)**
+**Exercise 4: (A -> (B /\ C)) -> (A -> B)**
 ```coq
-Lemma Ex04 : forall (A B C : Prop), (A -> (B /\ C)) -> (A -> B).
+Theorem Ex004 (A B C : Prop): (A -> (B /\ C)) -> (A -> B).
 Proof.
   intros.
   apply H in H0.
@@ -48,6 +48,52 @@ Proof.
 Qed.
 ```
 
+**Exercise 5: (A /\ (B -> ~A)) -> (A /\ ~B)**
+```coq
+Theorem Ex05 (A B : Prop): (A /\ (B -> ~A)) -> (A /\ ~B).
+Proof.
+  intros.
+  destruct H.
+  split.
+  exact H.
+  unfold not.
+  intro.
+  apply  H0 in H1.
+  apply H1.
+  exact H.
+Qed.
+```
+
+**Exercise 6: A \/ B -> A \/ C -> A \/ (B /\ C)**
+```coq
+Theorem Ex06 (A B C : Prop): A \/ B -> A \/ C -> A \/ (B /\ C).
+Proof.
+  intros.
+  destruct H.
+  + left.
+    exact H.
+  + destruct H0.
+    - left.
+      exact H0.
+    - right.
+      split.
+      * exact H.
+      * exact H0.
+Qed.
+```
+
+**Exercise 7: ((A -> B) -> A) -> A**
+```coq
+Theorem pierce (A B : Prop): ((A -> B) -> A) -> A.
+Proof.
+  intro.
+  destruct (classic A).
+  + exact H0.
+  + apply H.
+    intro.
+    contradiction.
+Qed.
+```
 ## First Order Logic
 
 **Exercise 1: forall (P Q : Set -> Prop), forall(a : Prop), P a -> Q a -> exists (x : Prop), P x /\ Q x**

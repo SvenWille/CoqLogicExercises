@@ -4,7 +4,7 @@
 
 
 
-Lemma Ex05 : forall (A B : Prop) , (A /\ (B -> ~A)) -> (A /\ ~B).
+Theorem Ex05 (A B : Prop): (A /\ (B -> ~A)) -> (A /\ ~B).
 Proof.
   intros.
   destruct H.
