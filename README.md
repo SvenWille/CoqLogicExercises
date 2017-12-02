@@ -205,6 +205,388 @@ Proof.
   + apply H. exact H0.
 Qed.
 ```
+
+**Exercise 16: A \\/ B <-> B \\/ A**
+```coq
+Theorem Ex016 (A B : Prop) : A \/ B <-> B \/ A.
+Proof.
+  split.
+  + intro.
+    destruct H.
+    - right. exact H.
+    - left. exact H.
+  + intro.
+    destruct H.
+    - right. exact H.
+    - left. exact H.
+Qed.
+```
+
+**Exercise 17: (A /\ B) /\ C <-> A /\ (B /\ C)**
+```coq
+Theorem Ex017 (A B C : Prop) : (A /\ B) /\ C <-> A /\ (B /\ C).
+Proof.
+  split.
+  + intro.
+    destruct H.
+    destruct H.
+    split.
+    - exact H.
+    - split.
+      * exact H1.
+      * exact H0.
+  + intro.
+    destruct H.
+    destruct H0.
+    split.
+    - split.
+      * exact H.
+      * exact H0.
+    - exact H1.
+Qed.
+```
+
+**Exercise 18: (A \\/ B) \\/ C <-> A \\/ (B \\/ C)**
+```coq
+Theorem Ex018 (A B C: Prop): (A \/ B) \/ C <-> A \/ (B \/ C).
+Proof.
+  split.
+  + intro.
+    destruct H.
+    - destruct H.
+      * left. exact H.
+      * right. left. exact H.
+    - right. right. exact H.
+  + intro. 
+    destruct H.
+    - left. left. exact H.
+    - destruct H.
+      * left. right. exact H.
+      * right. exact H.
+Qed.
+```
+
+**Exercise 19: A /\ (B \\/ C) <-> (A /\ B) \\/ (A /\ C)**
+```coq
+Theorem Ex019 (A B C : Prop) :  A /\ (B \/ C) <-> (A /\ B) \/ (A /\ C).
+Proof.
+  split.
+  + intro.
+    destruct H.
+    destruct H0.
+    - left. split.
+      * exact H.
+      * exact H0.
+    - right. split.
+      * exact H.
+      * exact H0.
+  + intro. destruct H.
+    - destruct H. split.
+      * exact H.
+      * left. exact H0.
+    - destruct H. split.
+      * exact H.
+      * right. exact H0.
+Qed.
+```
+
+**Exercise 20: A \\/ (B /\ C) <-> (A \\/ B) /\ (A \\/ C)**
+```coq
+Theorem Ex020 (A B C : Prop): A \/ (B /\ C) <-> (A \/ B) /\ (A \/ C).
+Proof.
+  split.
+  + intro.
+    split.
+    - destruct H.
+      * left. exact H.
+      * destruct H. right. exact H.
+    - destruct H.
+      * left. exact H.
+      * destruct H. right. exact H0.
+  + intro.
+    destruct H.
+    destruct H.
+    - destruct H0.
+      * left. exact H.
+      * left.  exact H.
+    - destruct H0. 
+      * left. exact H0.
+      * right. split.
+        ++ exact H.
+        ++ exact H0.
+Qed.
+```
+
+**Exercise 21: (A <-> B) <-> (A /\ B) \/ (~A /\ ~B)**
+```coq
+Require Import Classical.
+
+Theorem Ex021 (A B : Prop): (A <-> B) <-> (A /\ B) \/ (~A /\ ~B).
+Proof.
+  split.
+  + intro.
+    destruct H.
+    apply NNPP.
+    intro.
+    apply H1.
+    right. 
+    split.
+    - intro. 
+      apply H1. left. split. 
+      * exact H2.
+      * apply H. exact H2.
+    - intro.
+      apply H1. left. split.
+      * apply H0. exact H2.
+      * exact H2.
+  + intro.
+    split.
+    - intro.
+      destruct H.
+      * destruct H. exact H1.
+      * destruct H. exfalso. apply H. exact H0.
+    - intro.
+      destruct H.
+      * destruct H.
+        exact H.
+      * destruct H. exfalso. apply H1. exact H0.
+Qed.
+```
+
+**Exercise 22: (A -> B) -> (A -> B -> C) -> (A -> C)**
+```coq
+Theorem Ex022 (A B C : Prop): (A -> B) -> (A -> B -> C) -> (A -> C).
+Proof.
+  intros.
+  apply H0.
+  + exact H1.
+  + apply H. exact H1.
+Qed.
+```
+
+**Exercise 23: (A -> B) <-> (~A \/ B)**
+```coq
+Require Import Classical.
+
+Theorem Ex023 (A B : Prop): (A -> B) <-> (~A \/ B).
+Proof.
+  split.
+  + intro.
+    apply NNPP.
+    intro.
+    apply H0.
+    left.
+    intro.
+    apply H0.
+    right.
+    apply H.
+    exact H1.
+  + intros.
+    destruct H.
+    - contradiction.
+    - exact H.
+Qed.
+```
+
+**Exercise 24: (A <-> B) <-> (~A <-> ~B)**
+```coq
+Require Import Classical.
+
+Theorem Ex024 (A B : Prop): (A <-> B) <-> (~A <-> ~B).
+Proof.
+  split.
+  + intro.
+    destruct H.
+    split.
+    - intro. intro.
+      apply H1. apply H0. exact H2.
+    - intro. intro. apply H1. apply H. exact H2.
+  + intro. 
+    destruct H.
+    split.
+    - intro.
+      apply NNPP.
+      intro.
+      apply H0.
+      * exact H2.
+      * exact H1.
+    - intro. apply NNPP.
+      intro. apply H. 
+      * exact H2.
+      * exact H1.
+Qed.
+```
+
+**Exercise 25: A <-> ~~A**
+```coq
+Require Import Classical.
+
+Theorem Ex025 (A : Prop): A <-> ~~A.
+Proof.
+  split.
+  + intro.
+    intro.
+    contradiction.
+  + intro.
+    apply NNPP.
+    intro. 
+    contradiction.
+Qed.
+
+(*without NNPP*)
+
+Theorem Ex025_2 (A : Prop): A <-> ~~A.
+Proof.
+  split.
+  + intro.
+    intro.
+    contradiction.
+  + intro.
+    pose proof (classic A).
+    destruct H0.
+    - exact H0.
+    - contradiction.
+Qed.
+```
+
+**Exercise 26: (A -> (B -> C)) <-> (B -> (A -> C))**
+```coq
+Theorem Ex026 (A B C : Prop):  (A -> (B -> C)) <-> (B -> (A -> C)).
+Proof.
+  split.
+  + intros.
+    apply H.
+    - exact H1.
+    - exact H0.
+  + intros.
+    apply H.
+    - exact H1.
+    - exact H0.
+Qed.
+```
+
+**Exercise 27: A \\/ ~A**
+```coq
+Require Import Classical.
+
+Theorem Ex027 (A : Prop): A \/ ~A.
+Proof.
+  apply NNPP.
+  intro.
+  apply H.
+  right.
+  intro.
+  apply H.
+  left.
+  exact H0.
+Qed.
+```
+
+**Exercise 28: ~(A /\ B) <-> (~A \\/ ~B)**
+```coq
+Require Import Classical.
+
+Theorem Ex028 (A B : Prop): ~(A /\ B) <-> (~A \/ ~B).
+Proof.
+  split.
+  + intro.
+    apply NNPP.
+    intro.
+    apply H0.
+    left.
+    intro.
+    apply H0.
+    right.
+    intro.
+    apply H.
+    split.
+    - exact H1.
+    - exact H2.
+  + intro.
+    intro.
+    destruct H0.
+    destruct H.
+    - apply H. exact H0.
+    - apply H. exact H1.
+Qed.
+```
+
+**Exercises 29: (A -> B) -> (C -> ~B) -> (A -> ~C)**
+```coq
+Theorem Ex029 (A B C : Prop): (A -> B) -> (C -> ~B) -> (A -> ~C).
+Proof.
+  intros.
+  intro.
+  apply H0.
+  + exact H2.
+  + apply H.
+    exact H1.
+Qed.
+```
+
+**Exercises 30: (A -> B -> C) <-> (~C -> A -> ~B)**
+```coq
+Require Import Classical.
+
+Theorem Ex030 (A B C : Prop) :  (A -> B -> C) <-> (~C -> A -> ~B).
+Proof.
+  split.
+  + intro.
+    intros.
+    intro.
+    apply H0.
+    apply H.
+    - exact H1.
+    - exact H2.
+  + intros.
+    apply NNPP.
+    intro.
+    apply H.
+    * exact H2.
+    * exact H0.
+    * exact H1.
+Qed.
+```
+
+**Exercise 31: (A -> B) \\/ A <-> (B -> A) \\/ B**
+```coq
+Require Import Classical.
+
+Theorem Ex031 (A B C : Prop):  (A -> B) \/ A <-> (B -> A) \/ B.
+Proof.
+  split.
+  + intro.
+    destruct H.
+    - apply NNPP.
+      intro.
+      apply H0.
+      left.
+      intro.
+      apply NNPP.
+      intro.
+      apply H0.
+      right.
+      exact H1.
+    - left.
+      intro.
+      exact H.
+  + intro.
+    destruct H.
+    - apply NNPP.
+      intro.
+      apply H0.
+      left.
+      intro.
+      apply NNPP.
+      intro.
+      apply H0.
+      right.
+      exact H1.
+    - left.
+      intro.
+      exact H.
+Qed.
+```
 ## First Order Logic
 
 **Exercise 1: P a -> Q a -> exists (x : Prop), P x /\ Q x**
