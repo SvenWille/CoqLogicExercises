@@ -775,7 +775,7 @@ Proof.
   + exact H3.
 Qed.
 ```
-**Exercise 44: ~(~(A -> B) /\ ~B) -> (~C -> A) -> C \\/ B**
+**Exercise 44: \~(\~(A -> B) /\ ~B) -> (~C -> A) -> C \\/ B**
 ```coq
 Require Import Classical.
 
