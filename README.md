@@ -800,6 +800,40 @@ Proof.
 Qed.
 ```
 
+**Exercise 45: C -> ~A \\/ ((B \\/ C) -> A)**
+```coq
+Require Import Classical.
+
+Theorem Ex045 (A B C : Prop): C -> ~A \/ ((B \/ C) -> A).
+Proof.
+  intro.
+  apply NNPP.
+  intro. 
+  apply H0.
+  left.
+  intro.
+  apply H0.
+  right.
+  intro.
+  exact H1.
+Qed.
+```
+
+**Exercise 46: (A /\ (A -> ~A)) -> (A /\ (B -> ~A))**
+```coq
+Theorem Ex046 (A B : Prop): (A /\ (A -> ~A)) -> (A /\ (B -> ~A)).
+Proof.
+  intro.
+  destruct H.
+  split.
+  + exact H.
+  + intro. intro.
+    apply H0.
+    - exact H.
+    - exact H.
+Qed.
+```
+
 ## First Order Logic
 
 **Exercise 1: P a -> Q a -> exists (x : Prop), P x /\ Q x**
